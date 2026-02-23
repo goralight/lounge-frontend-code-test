@@ -32,52 +32,74 @@
 @layer components {
   .button {
     @apply px-4 py-2;
-    @apply transition-all;
+    @apply transition-colors;
+    @apply relative;
     @apply font-family font-light text-sm leading-6 uppercase tracking-button;
     @apply cursor-pointer;
     @apply outline-none;
-    @apply flex items-center justify-center gap-2;
-
+    /* When reviewing this ignore this and the below comment */
     /* the hover could be neutral-300 */
     @apply bg-neutral-950 text-foreground-inverse;
     @apply hover:bg-neutral-50 hover:text-foreground-subtle;
     @apply focus-visible:bg-neutral-950 focus-visible:text-foreground-inverse focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
     @apply active:bg-neutral-950 active:text-foreground-inverse;
     @apply disabled:bg-neutral-100 disabled:text-foreground-disabled;
-  }
 
-  .button--variant-secondary {
-    @apply bg-neutral-0 text-foreground-default shadow-[inset_0_0_0_1px_var(--color-border-default)];
-    @apply hover:bg-neutral-50 hover:text-foreground-default;
-    @apply focus-visible:bg-neutral-0 focus-visible:text-foreground-default focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
-    @apply active:bg-neutral-0 active:text-foreground-default active:shadow-[inset_0_0_0_1px_var(--color-border-default)];
-    @apply disabled:bg-neutral-100 disabled:text-foreground-disabled;
-  }
+    & .button__content {
+      @apply flex items-center justify-center gap-2 transition-opacity;
+      @apply opacity-100 visible;
+    }
 
-  .button--variant-ghost {
-    @apply bg-transparent text-foreground-default;
-    @apply hover:bg-neutral-50 hover:text-foreground-default;
-    @apply focus-visible:bg-transparent focus-visible:text-foreground-default focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
-    @apply active:bg-neutral-50 active:text-foreground-default;
-    @apply disabled:bg-transparent disabled:text-foreground-disabled;
-  }
+    & .button__loading-spinner {
+      @apply absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity;
+      @apply opacity-0 invisible pointer-events-none;
+    }
 
-  .button--size-sm {
-    @apply px-3 py-1;
-    @apply gap-1;
-  }
+    &.button--disabled {
+      @apply cursor-not-allowed;
+    }
 
-  .button--size-lg {
-    @apply px-6 py-3;
-    @apply gap-3;
-  }
+    &.button--variant-secondary {
+      @apply bg-neutral-0 text-foreground-default shadow-[inset_0_0_0_1px_var(--color-border-default)];
+      @apply hover:bg-neutral-50 hover:text-foreground-default hover:shadow-[inset_0_0_0_1px_var(--color-border-hover)];
+      @apply focus-visible:bg-neutral-0 focus-visible:text-foreground-default focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
+      @apply active:bg-neutral-0 active:text-foreground-default active:shadow-[inset_0_0_0_1px_var(--color-border-default)];
+      @apply disabled:bg-neutral-100 disabled:text-foreground-disabled;
 
-  .button--disabled {
-    @apply cursor-not-allowed;
+      &.button--disabled {
+        @apply hover:shadow-none;
+      }
+    }
+
+    &.button--variant-ghost {
+      @apply bg-transparent text-foreground-default;
+      @apply hover:bg-neutral-50 hover:text-foreground-default;
+      @apply focus-visible:bg-transparent focus-visible:text-foreground-default focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
+      @apply active:bg-neutral-0 active:text-foreground-default;
+      @apply disabled:bg-transparent disabled:text-foreground-disabled;
+    }
+
+    &.button--size-sm {
+      @apply px-3 py-1;
+      & .button__content {
+        @apply gap-1;
+      }
+    }
+
+    &.button--size-lg {
+      @apply px-6 py-3;
+      & .button__content {
+        @apply gap-3;
+      }
+    }
+
+    &.button--loading {
+      & .button__content {
+        @apply opacity-0 invisible pointer-events-none;
+      }
+      & .button__loading-spinner {
+        @apply opacity-100 visible;
+      }
+    }
   }
 }
-
-/*
-  TODO:
-  - Add loading state styles (e.g. spinner or .btn-loading).
-*/

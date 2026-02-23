@@ -12,4 +12,6 @@ export interface ButtonProps {
   'data-testid'?: string
   icon?: IconProps
   type?: 'button' | 'submit'
+  'aria-label'?: string
+  ref?: React.RefObject<HTMLButtonElement>
 }

@@ -11,6 +11,8 @@ const Button = ({
   'data-testid': dataTestId,
   icon,
   type = 'button',
+  'aria-label': ariaLabel,
+  ref,
 }: ButtonProps) => {
   const buttonClasses = [
     'button',
@@ -31,13 +33,22 @@ const Button = ({
 
   return (
     <button
+      ref={ref}
+      type={type}
+      data-testid={dataTestId}
       className={buttonClasses}
       disabled={disabled || isLoading}
-      data-testid={dataTestId}
       onClick={onClick}
-      type={type}
+      aria-busy={isLoading || undefined}
+      aria-disabled={disabled || undefined}
+      aria-label={ariaLabel || undefined}
     >
-      {isLoading ? <Spinner /> : content}
+      <span className="button__content" aria-hidden={isLoading}>
+        {content}
+      </span>
+      <span className="button__loading-spinner" aria-hidden={!isLoading}>
+        <Spinner />
+      </span>
     </button>
   )
 }
