@@ -1,7 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss';
+
+@theme {
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f6f6f6;
+  --color-neutral-100: #e7e7e7;
+  --color-neutral-200: #d1d1d1;
+  --color-neutral-300: #b0b0b0;
+  --color-neutral-400: #888888;
+  --color-neutral-500: #6d6d6d;
+  --color-neutral-600: #5d5d5d;
+  --color-neutral-700: #4f4f4f;
+  --color-neutral-800: #454545;
+  --color-neutral-900: #3d3d3d;
+  --color-neutral-950: #111111;
+  --color-neutral-1000: #000000;
+
+  --color-foreground-default: var(--color-neutral-950);
+  --color-foreground-subtle: var(--color-neutral-400);
+  --color-foreground-inverse: var(--color-neutral-0);
+  --color-foreground-disabled: var(--color-neutral-300);
+
+  --color-border-default: var(--color-neutral-100);
+  --color-border-hover: var(--color-neutral-300);
+  --color-border-active: var(--color-neutral-900);
+  --color-border-disabled: var(--color-neutral-100);
+  --font-family: 'Inter Tight', sans-serif;
+  --tracking-button: 2%;
+}
+
+@layer components {
+  .button {
+    @apply px-4 py-2;
+    @apply transition-all;
+    @apply font-family font-light text-sm leading-6 uppercase tracking-button;
+    @apply cursor-pointer;
+    @apply outline-none;
+    @apply flex items-center justify-center gap-2;
+
+    /* the hover could be neutral-300 */
+    @apply bg-neutral-950 text-foreground-inverse;
+    @apply hover:bg-neutral-50 hover:text-foreground-subtle;
+    @apply focus-visible:bg-neutral-950 focus-visible:text-foreground-inverse focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
+    @apply active:bg-neutral-950 active:text-foreground-inverse;
+    @apply disabled:bg-neutral-100 disabled:text-foreground-disabled;
+  }
+
+  .button--variant-secondary {
+    @apply bg-neutral-0 text-foreground-default shadow-[inset_0_0_0_1px_var(--color-border-default)];
+    @apply hover:bg-neutral-50 hover:text-foreground-default;
+    @apply focus-visible:bg-neutral-0 focus-visible:text-foreground-default focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
+    @apply active:bg-neutral-0 active:text-foreground-default active:shadow-[inset_0_0_0_1px_var(--color-border-default)];
+    @apply disabled:bg-neutral-100 disabled:text-foreground-disabled;
+  }
+
+  .button--variant-ghost {
+    @apply bg-transparent text-foreground-default;
+    @apply hover:bg-neutral-50 hover:text-foreground-default;
+    @apply focus-visible:bg-transparent focus-visible:text-foreground-default focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
+    @apply active:bg-neutral-50 active:text-foreground-default;
+    @apply disabled:bg-transparent disabled:text-foreground-disabled;
+  }
+
+  .button--size-sm {
+    @apply px-3 py-1;
+    @apply gap-1;
+  }
+
+  .button--size-lg {
+    @apply px-6 py-3;
+    @apply gap-3;
+  }
+
+  .button--disabled {
+    @apply cursor-not-allowed;
+  }
+}
 
 /*
   TODO:
-  - Add Button component styles and variants.
-  - Add loading and disabled state styles.
+  - Add loading state styles (e.g. spinner or .btn-loading).
 */
