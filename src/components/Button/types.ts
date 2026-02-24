@@ -1,17 +1,15 @@
+import { type ComponentPropsWithRef } from 'react'
+
 interface IconProps {
   element: React.ReactNode
   position: 'left' | 'right'
 }
 
-export interface ButtonProps {
+export interface ButtonProps extends Omit<ComponentPropsWithRef<'button'>, 'children'> {
   children: string
-  onClick: () => void
-  disabled?: boolean
   isLoading?: boolean
-  className?: string
-  'data-testid'?: string
   icon?: IconProps
-  type?: 'button' | 'submit'
-  'aria-label'?: string
-  ref?: React.RefObject<HTMLButtonElement>
+  'data-testid'?: string
+  // for defaulting to type button
+  type?: 'button' | 'submit' | 'reset' | undefined
 }

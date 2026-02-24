@@ -1,3 +1,5 @@
+import React from 'react'
+
 const Spinner = () => {
   return (
     <div role="status">
@@ -19,7 +21,6 @@ const Spinner = () => {
           strokeWidth="3"
         />
       </svg>
-      <span className="sr-only">Loading...</span>
     </div>
   )
 }

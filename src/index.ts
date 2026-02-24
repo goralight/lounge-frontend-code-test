@@ -1,4 +1,4 @@
-import Button from './components/Button/Button'
+import { Button, type ButtonProps } from './components/Button'
 import './styles/main.css'
 
-export { Button }
+export { Button, type ButtonProps }

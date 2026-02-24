@@ -4,21 +4,18 @@ import Spinner from '../../icons/Spinner'
 
 const Button = ({
   children,
-  onClick,
-  disabled,
   isLoading,
-  className,
-  'data-testid': dataTestId,
   icon,
+  'data-testid': dataTestId,
   type = 'button',
-  'aria-label': ariaLabel,
-  ref,
+  ...props
 }: ButtonProps) => {
+  const { disabled, className } = props
   const buttonClasses = [
     'button',
     className,
-    disabled && 'button--disabled',
-    isLoading && 'button--disabled button--loading',
+    (disabled || isLoading) && 'button--disabled',
+    isLoading && 'button--loading',
   ]
     .filter(Boolean)
     .join(' ')
@@ -33,15 +30,12 @@ const Button = ({
 
   return (
     <button
-      ref={ref}
+      {...props}
       type={type}
       data-testid={dataTestId}
       className={buttonClasses}
       disabled={disabled || isLoading}
-      onClick={onClick}
       aria-busy={isLoading || undefined}
-      aria-disabled={disabled || undefined}
-      aria-label={ariaLabel || undefined}
     >
       <span className="button__content" aria-hidden={isLoading}>
         {content}
