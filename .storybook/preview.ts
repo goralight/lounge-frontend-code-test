@@ -11,7 +11,7 @@ const preview: Preview = {
       values: [
         {
           name: 'white',
-          value: '#00ff00',
+          value: '#ffffff',
         },
         {
           name: 'black',

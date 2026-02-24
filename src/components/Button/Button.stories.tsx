@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Button, type ButtonProps } from '.'
 import MagnifyingGlass from '../../icons/MagnifyingGlass'
 
-const meta: Meta<typeof Button> = {
+const meta: Meta<ButtonProps> = {
   title: 'Button',
   component: Button,
   tags: ['autodocs'],
@@ -27,7 +27,7 @@ const meta: Meta<typeof Button> = {
       table: {
         type: {
           detail:
-            'An icon to display inside the button. Should be a React component that renders an SVG.',
+            'An icon to display alongside the children. An object containing a React component that renders an SVG and a position.',
           summary: "{ element: React.ReactNode, position: 'left' | 'right' }",
         },
       },
@@ -66,7 +66,7 @@ const SIZE_MAP: Record<string, string> = {
   lg: 'button--size-lg',
 }
 
-// Due to primary and md being the default (no className), need to filter out the empty strings
+// Due to primary and md being the default (no className), need to filter out the empty string from dropdown
 const CLASSNAME_OPTIONS = Object.fromEntries(
   Object.entries(VARIANT_MAP)
     .flatMap(([_, variantClass]) =>
@@ -78,7 +78,7 @@ const CLASSNAME_OPTIONS = Object.fromEntries(
     .filter(([className]) => className),
 )
 
-export const Playground: StoryObj<typeof Button> = {
+export const Playground: StoryObj<ButtonProps> = {
   parameters: {
     controls: { disable: false },
   },
@@ -96,61 +96,61 @@ export const Playground: StoryObj<typeof Button> = {
     className: '',
     disabled: false,
     // Both the fn() and action() work, but they would lag the storybook and would track multiple ghost clicks
-    // Might be an issue with my machine though. But opted for a simple log.
+    // I think its an issue with my machine, so opted for the simple log.
     onClick: () => console.log('clicked'),
   },
 }
 
-export const Secondary: StoryObj<typeof Button> = {
+export const Secondary: StoryObj<ButtonProps> = {
   args: {
     ...meta.args,
     className: 'button--variant-secondary',
   },
 }
 
-export const Ghost: StoryObj<typeof Button> = {
+export const Ghost: StoryObj<ButtonProps> = {
   args: {
     ...meta.args,
     className: 'button--variant-ghost',
   },
 }
 
-export const Small: StoryObj<typeof Button> = {
+export const Small: StoryObj<ButtonProps> = {
   args: {
     ...meta.args,
     className: 'button--size-sm',
   },
 }
 
-export const Large: StoryObj<typeof Button> = {
+export const Large: StoryObj<ButtonProps> = {
   args: {
     ...meta.args,
     className: 'button--size-lg',
   },
 }
 
-export const WithLeftIcon: StoryObj<typeof Button> = {
+export const WithLeftIcon: StoryObj<ButtonProps> = {
   args: {
     ...meta.args,
     icon: { element: <MagnifyingGlass />, position: 'left' },
   },
 }
 
-export const WithRightIcon: StoryObj<typeof Button> = {
+export const WithRightIcon: StoryObj<ButtonProps> = {
   args: {
     ...meta.args,
     icon: { element: <MagnifyingGlass />, position: 'right' },
   },
 }
 
-export const Disabled: StoryObj<typeof Button> = {
+export const Disabled: StoryObj<ButtonProps> = {
   args: {
     ...meta.args,
     disabled: true,
   },
 }
 
-export const DisabledWithIcon: StoryObj<typeof Button> = {
+export const DisabledWithIcon: StoryObj<ButtonProps> = {
   args: {
     ...meta.args,
     disabled: true,
@@ -158,7 +158,7 @@ export const DisabledWithIcon: StoryObj<typeof Button> = {
   },
 }
 
-export const IsLoading: StoryObj<typeof Button> = {
+export const IsLoading: StoryObj<ButtonProps> = {
   args: {
     ...meta.args,
     isLoading: true,
@@ -168,7 +168,7 @@ export const IsLoading: StoryObj<typeof Button> = {
 
 const makeAllSizesWithPropsStory = (
   extraProps: Partial<ButtonProps> = {},
-): StoryObj<typeof Button> => ({
+): StoryObj<ButtonProps> => ({
   parameters: {
     docs: {
       description: {
@@ -195,33 +195,28 @@ const makeAllSizesWithPropsStory = (
   },
 })
 
-export const AllVariantsAndSizes: StoryObj<typeof Button> = makeAllSizesWithPropsStory()
+export const AllVariantsAndSizes: StoryObj<ButtonProps> = makeAllSizesWithPropsStory()
 
-export const AllDisabledStatesWithVariantsAndSizes: StoryObj<typeof Button> =
+export const AllDisabledStatesWithVariantsAndSizes: StoryObj<ButtonProps> =
   makeAllSizesWithPropsStory({
     disabled: true,
   })
 
-export const AllLoadingStatesWithVariantsAndSizes: StoryObj<typeof Button> =
+export const AllLoadingStatesWithVariantsAndSizes: StoryObj<ButtonProps> =
   makeAllSizesWithPropsStory({
     isLoading: true,
     'aria-label': 'Loading...',
   })
 
-export const AllLeftIconsWithVariantsAndSizes: StoryObj<typeof Button> = makeAllSizesWithPropsStory(
-  {
-    icon: { element: <MagnifyingGlass />, position: 'left' },
-  },
-)
+export const AllLeftIconsWithVariantsAndSizes: StoryObj<ButtonProps> = makeAllSizesWithPropsStory({
+  icon: { element: <MagnifyingGlass />, position: 'left' },
+})
 
-export const AllRightIconsWithVariantsAndSizes: StoryObj<typeof Button> =
-  makeAllSizesWithPropsStory({
-    icon: { element: <MagnifyingGlass />, position: 'right' },
-  })
+export const AllRightIconsWithVariantsAndSizes: StoryObj<ButtonProps> = makeAllSizesWithPropsStory({
+  icon: { element: <MagnifyingGlass />, position: 'right' },
+})
 
-export const DisabledIconWithVariantsAndSizes: StoryObj<typeof Button> = makeAllSizesWithPropsStory(
-  {
-    icon: { element: <MagnifyingGlass />, position: 'left' },
-    disabled: true,
-  },
-)
+export const DisabledIconWithVariantsAndSizes: StoryObj<ButtonProps> = makeAllSizesWithPropsStory({
+  icon: { element: <MagnifyingGlass />, position: 'left' },
+  disabled: true,
+})

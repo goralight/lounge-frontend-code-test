@@ -11,6 +11,7 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const { disabled, className } = props
+
   const buttonClasses = [
     'button',
     className,
@@ -37,10 +38,14 @@ const Button = ({
       disabled={disabled || isLoading}
       aria-busy={isLoading || undefined}
     >
-      <span className="button__content" aria-hidden={isLoading}>
+      <span className="button__content" data-testid="content" aria-hidden={isLoading || undefined}>
         {content}
       </span>
-      <span className="button__loading-spinner" aria-hidden={!isLoading}>
+      <span
+        className="button__loading-spinner"
+        data-testid="loading-spinner"
+        aria-hidden={!isLoading || undefined}
+      >
         <Spinner />
       </span>
     </button>
