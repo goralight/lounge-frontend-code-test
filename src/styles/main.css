@@ -1,7 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss';
 
-/*
-  TODO:
-  - Add Button component styles and variants.
-  - Add loading and disabled state styles.
-*/
+@theme {
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f6f6f6;
+  --color-neutral-100: #e7e7e7;
+  --color-neutral-200: #d1d1d1;
+  --color-neutral-300: #b0b0b0;
+  --color-neutral-400: #888888;
+  --color-neutral-500: #6d6d6d;
+  --color-neutral-600: #5d5d5d;
+  --color-neutral-700: #4f4f4f;
+  --color-neutral-800: #454545;
+  --color-neutral-900: #3d3d3d;
+  --color-neutral-950: #111111;
+  --color-neutral-1000: #000000;
+
+  --color-foreground-default: var(--color-neutral-950);
+  --color-foreground-subtle: var(--color-neutral-400);
+  --color-foreground-inverse: var(--color-neutral-0);
+  --color-foreground-disabled: var(--color-neutral-300);
+
+  --color-border-default: var(--color-neutral-100);
+  --color-border-hover: var(--color-neutral-300);
+  --color-border-active: var(--color-neutral-900);
+  --color-border-disabled: var(--color-neutral-100);
+
+  --color-surface-button-primary: var(--color-neutral-950);
+  --color-surface-button-secondary: var(--color-neutral-0);
+  --color-surface-button-ghost: transparent;
+
+  --font-family: 'Inter Tight', sans-serif;
+  --tracking-button: 2%;
+}
+
+@layer components {
+  .button {
+    @apply px-4 py-2;
+    @apply transition-colors;
+    @apply relative;
+    @apply font-family font-light text-sm leading-6 uppercase tracking-button;
+    @apply cursor-pointer;
+
+    @apply bg-surface-button-primary text-foreground-inverse;
+    @apply hover:bg-neutral-300;
+    @apply focus-visible:outline-none focus-visible:bg-surface-button-primary focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
+    @apply active:bg-surface-button-primary active:shadow-none;
+    @apply disabled:bg-neutral-100 disabled:text-foreground-disabled;
+
+    & .button__content {
+      @apply flex items-center justify-center gap-2 transition-opacity;
+      @apply opacity-100 visible;
+    }
+
+    & .button__loading-spinner {
+      @apply absolute inset-0 flex items-center justify-center transition-opacity;
+      @apply opacity-0 invisible pointer-events-none;
+    }
+
+    &.button--variant-secondary {
+      @apply bg-surface-button-secondary text-foreground-default shadow-[inset_0_0_0_1px_var(--color-border-default)];
+      @apply hover:bg-neutral-50 enabled:hover:shadow-[inset_0_0_0_1px_var(--color-border-hover)];
+      @apply focus-visible:bg-surface-button-secondary focus-visible:shadow-[inset_0_0_0_1px_var(--color-border-active)];
+      @apply active:bg-surface-button-secondary active:shadow-[inset_0_0_0_1px_var(--color-border-default)] active:hover:shadow-[inset_0_0_0_1px_var(--color-border-default)];
+      @apply disabled:bg-neutral-100 disabled:text-foreground-disabled disabled:shadow-none;
+    }
+
+    &.button--variant-ghost {
+      @apply bg-surface-button-ghost text-foreground-default;
+      @apply hover:bg-neutral-50;
+      @apply focus-visible:bg-surface-button-ghost;
+      @apply active:bg-neutral-0;
+      @apply disabled:bg-surface-button-ghost disabled:text-foreground-disabled;
+    }
+
+    &.button--size-sm {
+      @apply px-3 py-1;
+      & .button__content {
+        @apply gap-1;
+      }
+    }
+
+    &.button--size-lg {
+      @apply px-6 py-3;
+      & .button__content {
+        @apply gap-3;
+      }
+    }
+
+    &.button--disabled {
+      @apply cursor-not-allowed;
+    }
+
+    &.button--loading {
+      & .button__content {
+        @apply opacity-0 invisible pointer-events-none;
+      }
+      & .button__loading-spinner {
+        @apply opacity-100 visible;
+      }
+    }
+  }
+}
